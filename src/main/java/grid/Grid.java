@@ -28,7 +28,7 @@ public class Grid {
 
     public boolean checkActive() {
         return active.getUnits().stream()
-                .allMatch(u -> u.getY() < screen.Frame.HEIGHT - 2 * SIZE)
+                .allMatch(unit -> unit.getY() < Frame.HEIGHT - 2 * SIZE)
                 && active.getUnits().stream()
                     .noneMatch(this::checkCollision);
     }
@@ -39,17 +39,21 @@ public class Grid {
                         && u.getY() == unit.getY() + SIZE);
     }
 
-    public void deleteRow() {
-        for (int y = screen.Frame.HEIGHT; y >= 0; y -= SIZE) {
+    public void checkRows() {
+        for (int y = Frame.HEIGHT; y >= 0; y -= SIZE) {
             int finalY = y;
             List<Unit> row = units.stream()
                     .filter(unit -> unit.getY() == finalY)
                     .toList();
-            if (row.size() == 18) {
-                units.removeAll(row);
-                units.forEach(unit -> unit.translate(0, 1));
-            }
+            if (row.size() == 18) deleteRow(row, finalY);
         }
+    }
+
+    private void deleteRow(List<Unit> row, int y) {
+        units.removeAll(row);
+        units.stream()
+                .filter(unit -> unit.getY() < y)
+                .forEach(unit -> unit.translate(0, 1));
     }
 
     public void paint(Graphics g) {

@@ -29,11 +29,10 @@ public class GamePanel extends JPanel implements ActionListener {
     private void startDropTimer(Difficulty difficulty) {
         int delay = difficulty.getDelay();
         Timer dropTimer = new Timer(delay, e -> {
-            if (grid.checkActive()) grid.getActive().translate(0, 1);
-            else {
-                addBlock();
-                grid.deleteRow();
-            }
+            grid.checkRows();
+            if (grid.checkActive())
+                grid.getActive().translate(0, 1);
+            else addBlock();
         });
         dropTimer.start();
     }
