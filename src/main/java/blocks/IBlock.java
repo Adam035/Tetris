@@ -15,5 +15,7 @@ public class IBlock extends Block {
         getUnits().get(0).translate(-2 * Math.cos(2 * getAngle()),2 * Math.cos(2 * getAngle()));
         getUnits().get(1).translate(-Math.cos(2 * getAngle()), Math.cos(2 * getAngle()));
         getUnits().get(3).translate(Math.cos(2 * getAngle()), -Math.cos(2 * getAngle()));
+        fixPosition();
+        fixPosition();
     }
 }

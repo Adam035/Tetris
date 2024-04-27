@@ -15,6 +15,7 @@ public class ZBlock extends Block {
         int cos = (int) Math.signum((int) Math.cos(2 * getAngle()));
         getUnits().get(0).translate(0, -2 * cos);
         getUnits().get(1).translate(2 * cos, 0);
+        fixPosition();
     }
 
 }

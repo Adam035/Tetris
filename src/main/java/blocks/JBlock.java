@@ -21,5 +21,6 @@ public class JBlock extends Block {
         dy = (int) Math.signum((int) Math.sin(getAngle()));
 
         getUnits().get(3).translate(-2 * dx, -2 * dy);
+        fixPosition();
     }
 }

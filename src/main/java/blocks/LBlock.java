@@ -22,5 +22,6 @@ public class LBlock extends Block {
         dy = (int) Math.signum((int) Math.cos(getAngle()));
 
         getUnits().get(3).translate(-2 * dx, 2 * dy);
+        fixPosition();
     }
 }

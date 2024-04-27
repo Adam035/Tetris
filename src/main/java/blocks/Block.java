@@ -29,9 +29,44 @@ public abstract class Block {
         units.add(unit);
     }
 
-
-    public void translate(int dx, int dy) {
+    private void translate(int dx, int dy) {
         units.forEach(u -> u.translate(dx, dy));
+    }
+
+
+    public void move(int dx, int dy) {
+        if (canMove(dx)) translate(dx, dy);
+    }
+
+    private boolean canMove(int dx) {
+        return units.stream()
+                .allMatch(u -> {
+                    boolean left = u.getX() + dx >= 0;
+                    boolean right = u.getX() + dx <= 17 * Unit.SIZE;
+                    return left && right;
+                });
+    }
+
+    protected void fixPosition() {
+        List<Integer> positions = units.stream()
+                .map(Unit::getX)
+                .toList();
+        fixMin(positions);
+        fixMax(positions);
+    }
+
+    private void fixMin(List<Integer> positions) {
+        assert positions.size() > 0;
+        int min = positions.stream()
+                .min(Integer::compareTo).get();
+        if (min < 0) translate(1, 0);
+    }
+
+    private void fixMax(List<Integer> positions) {
+        assert positions.size() > 0;
+        int max = positions.stream()
+                .max(Integer::compareTo).get();
+        if (max > 17 * Unit.SIZE) translate(-1, 0);
     }
 
     public void rotate() {

@@ -22,5 +22,6 @@ public class TBlock extends Block{
         dy = (int) Math.signum(Math.sin(getAngle() + Math.PI / 4));
 
         getUnits().get(3).translate(dx, -dy);
+        fixPosition();
     }
 }

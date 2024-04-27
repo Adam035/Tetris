@@ -31,7 +31,7 @@ public class GamePanel extends JPanel implements ActionListener {
         Timer dropTimer = new Timer(delay, e -> {
             grid.checkRows();
             if (grid.checkActive())
-                grid.getActive().translate(0, 1);
+                grid.getActive().move(0, 1);
             else addBlock();
         });
         dropTimer.start();
@@ -71,11 +71,11 @@ public class GamePanel extends JPanel implements ActionListener {
         public void keyPressed(KeyEvent e) {
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_SPACE -> grid.getActive().rotate();
-                case KeyEvent.VK_LEFT -> grid.getActive().translate(-1, 0);
-                case KeyEvent.VK_RIGHT -> grid.getActive().translate(1, 0);
+                case KeyEvent.VK_LEFT -> grid.getActive().move(-1, 0);
+                case KeyEvent.VK_RIGHT -> grid.getActive().move(1, 0);
                 case KeyEvent.VK_DOWN -> {
                     while (grid.checkActive())
-                        grid.getActive().translate(0, 1);
+                        grid.getActive().move(0, 1);
                 }
             }
         }
